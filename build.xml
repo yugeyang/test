@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project name="AntTest" default="jar" basedir=".">
+  <property name="src" value="src"></property>
+   <property name="target" value="classes"></property>
+   	<property name="AntJar" value="AntJar"></property>
+   	  <property name="dist" value="dist"></property>
+    <path id="errpath">
+       <pathelement path="bb"/>
+    </path>
+     <target name="aa">
+        <echo>1111111</echo>
+     	 <echo message="${basedir}"/>
+     </target>
+	<target name="copy">
+	   <copy todir="aa">
+	     <fileset dir="bb"> </fileset>
+	   	 <fileset dir="cc"><exclude name="*.java"/></fileset>
+	   	  
+	   </copy>
+		<delete dir="bb"></delete>
+	</target>
+	<target name="init" description="创建一个文件夹"><!--target-->
+        <mkdir dir="${target}"/><!--task-->
+    	<mkdir dir="${dist}"/>
+    </target>
+	<target name="compile" depends="init">
+	    <javac srcdir="${src}" destdir="${target}">
+	    	    	<classpath refid="errpath"></classpath>
+	    </javac>
+	</target>
+	<target name="jar" depends="compile">
+		<!--<jar jarfile="${dist}/${AntJar}" basedir="${target}"></jar>-->
+		<jar destfile="${dist}/${AntJar}" basedir="${target}"></jar>
+	</target>
+	<target name="run" depends="jar">
+	     <java classname="com.Test" classpath ="${dist}/${AntJar}"></java>
+	</target>
+	 <echo>aaaaaaa</echo> 
+	 <echo />
+</project>
